@@ -17,7 +17,9 @@ using namespace std;
 const double PHI = (1 + sqrt(5))/2;
 const double PSI = (1 - sqrt(5))/2;
 
-// Returns nth Fibonacci number using the closed form expression
+/* Returns nth Fibonacci number using the closed form expression
+ * See http://en.wikipedia.org/wiki/Fibonacci_number#Closed-form_expression
+ */
 int getFibonacci(int n)
 {
   if(n == 0)
@@ -30,7 +32,6 @@ int getFibonacci(int n)
     return 1;
   }
 
-  // Return closed form result where n =
   return ( (pow(PHI, n) - pow(PSI, n)) / (sqrt(5)) );
 }
 
@@ -47,7 +48,7 @@ int main()
   int num = 0;
   int sum = 0;
 
-  // i = 3, not 4 because of 0 index
+  // i = 3, not 4 because closed form relation starts at 0
   int i = 3;
 
   while((num = getFibonacci(i)) < 4000000)
