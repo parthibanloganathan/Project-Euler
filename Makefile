@@ -9,15 +9,13 @@ CXXFLAGS = -g -Wall $(INCLUDES)
 LDFLAGS = -g
 LDLIBS  =
 
-executables = problem1
-objects = problem1.o
-
 .PHONY: default
-default: $(executables)
+default: $(basename $(wildcard problem*.cpp))
 
 .PHONY: clean
 clean:
-	rm *~ a.out core $(objects) $(executables)
+	rm *~ a.out core *.o
+	ls | grep -v "\." | grep -v Makefile | xargs rm
 
 .PHONY: all
 all: clean default
