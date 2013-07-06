@@ -14,8 +14,7 @@ default: $(basename $(wildcard problem*.cpp))
 
 .PHONY: clean
 clean:
-	rm *~ a.out core *.o
-	ls | grep -v "\." | grep -v Makefile | xargs rm
+	rm -f *.o *~ a.out core $(basename $(wildcard problem*.cpp))
 
 .PHONY: all
 all: clean default
