@@ -21,7 +21,7 @@ int main()
       num /= i;
     }
     // If all occurences of prime factor are
-    // used, got to the next prime num
+    // used, go to the next prime num
     else
     {
       i++;
