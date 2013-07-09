@@ -1,8 +1,11 @@
+#include "resource_prime.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <memory>
- 
+#include <string>
+#include <cstdlib>
+
 using namespace std;
 
 /*
@@ -11,6 +14,8 @@ using namespace std;
  *
  * Note: Uses shared pointers. Must be compiled with C++11.
  */
+
+const string primeFile = "prime_list.txt";
 
 // Get prime numbers smaller than n using Sieve of Erathosthenes
 shared_ptr<vector<long>> getPrimes(long n)
@@ -56,23 +61,43 @@ shared_ptr<vector<long>> getPrimes(long n)
   return primes;
 }
 
-int main()
+// Writes first n prime numbers to file
+void writeToFile(long n)
 {
-  const long n = 10000000;
   shared_ptr<vector<long>> primes = getPrimes(n);
 
-  ofstream primeFile;
-  primeFile.open("list_of_primes.txt");
+  ofstream outstream;
+  outstream.open(primeFile);
 
   typedef vector<long>::iterator Iterator;
 
   // Print to file
-  for(Iterator i = primes->end() - 1; i != primes->begin() - 1; i--)
+  for(Iterator i = primes->begin(); i != primes->end(); ++i)
   {
-    primeFile << *i << endl;
+    outstream << *i << endl;
   }
 
-  primeFile.close();
+  outstream.close();
+}
 
-  return 0;
+// Get nth prime number
+long getNthPrime(long n)
+{
+  ifstream instream;
+  instream.open(primeFile);
+
+  string line;
+  // Set maximum string size to 12 characters
+  // to prevent unnecessary resizing.
+  line.reserve(12);
+
+  // Skip to nth line
+  for(int i = 1; i < n; i++)
+  {
+    getline(instream, line);
+  }
+
+  getline(instream, line);
+
+  return atoi(line.c_str());
 }
