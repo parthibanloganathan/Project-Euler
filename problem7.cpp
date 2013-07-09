@@ -16,9 +16,10 @@ int main()
 
   // Created a list of primes
   // using the Sieve of Erathostenes
-  // for a number larger
-  // than n*log(n), which is approximately
+  // for 10 million.
+  // n*log(n) is approximately
   // the nth prime number.
+  // 10 million > n*(log(n))
   // writeToFile(9999999);
 
   cout << getNthPrime(n);
