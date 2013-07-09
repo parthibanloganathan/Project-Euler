@@ -61,8 +61,8 @@ shared_ptr<vector<long>> getPrimes(long n)
   return primes;
 }
 
-// Writes first n prime numbers to file
-void writeToFile(long n)
+// Write first n prime numbers to file
+void writeToFile(int n)
 {
   shared_ptr<vector<long>> primes = getPrimes(n);
 
@@ -81,7 +81,7 @@ void writeToFile(long n)
 }
 
 // Get nth prime number
-long getNthPrime(long n)
+long getNthPrime(int n)
 {
   ifstream instream;
   instream.open(primeFile);
@@ -100,4 +100,56 @@ long getNthPrime(long n)
   getline(instream, line);
 
   return atoi(line.c_str());
+}
+
+// Get sum of prime numbers smaller than n
+long long primeSum(long n)
+{
+  long long sum = 0;
+  long prime;
+
+  ifstream instream;
+  instream.open(primeFile);
+
+  string line;
+  // Set maximum string size to 12 characters
+  // to prevent unnecessary resizing.
+  line.reserve(12);
+
+  // Sum numbers in first n lines
+  while(prime < n)
+  {
+    getline(instream, line);
+    prime = atoi(line.c_str());
+
+    if(prime < n)
+    {
+      sum += prime;
+    }
+  }
+
+  return sum;
+}
+
+// Get sum of first n prime numbers
+long long primeNthSum(int n)
+{
+  long long sum = 0;
+
+  ifstream instream;
+  instream.open(primeFile);
+
+  string line;
+  // Set maximum string size to 12 characters
+  // to prevent unnecessary resizing.
+  line.reserve(12);
+
+  // Sum numbers in first n lines
+  for(int i = 0; i < n; i++)
+  {
+    getline(instream, line);
+    sum += atoi(line.c_str());
+  }
+
+  return sum;
 }

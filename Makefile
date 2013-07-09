@@ -12,11 +12,11 @@ LDLIBS  =
 .PHONY: default
 default: $(basename $(wildcard problem*.cpp))
 
-problem7: problem7.o resource_prime.o
+problem7: resource_prime.o
+
+problem10: resource_prime.o
 
 resource_prime.o: resource_prime.cpp resource_prime.h
-
-problem7.o: problem7.cpp
 
 .PHONY: clean
 clean:
