@@ -70,7 +70,7 @@ int main()
       for(int k = j; k > j - 4; k--)
       {
         horizontal_product *= grid[i][k];
-        vertical_product *= grid[k][j];
+        vertical_product *= grid[k][i];
       }
 
       int local_max = max(horizontal_product, vertical_product);
@@ -83,25 +83,30 @@ int main()
   }
 
   // Check diagonally
-  for(int i = SIZE - 3; i >= 0; i--)
+  for(int i = SIZE - 1; i >= 3; i--)
   {
-    for(int j = 0; j < SIZE; j++)
+    for(int j = 3; j < SIZE; j++)
     {
-      int product = 1;
+      int right_diagonal_product = 1;
+      int left_diagonal_product = 1;
 
+      int vertical = i;
       int horizontal = j;
-      int vertical = i + 4;
 
-      while(horizontal > j - 4)
+      while((vertical > i - 4) && (horizontal > j - 4))
       {
-        product *= grid[horizontal][vertical];
-        horizontal--;
+        right_diagonal_product *= grid[vertical][horizontal];
+        left_diagonal_product *= grid[vertical][SIZE - horizontal];
+
         vertical--;
+        horizontal--;
       }
 
-      if(product > global_max)
+      int local_max = max(left_diagonal_product, right_diagonal_product);
+
+      if(local_max > global_max)
       {
-        global_max = product;
+        global_max = local_max;
       }
     }
   }
