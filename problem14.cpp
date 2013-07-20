@@ -22,7 +22,7 @@ using namespace std;
  */
 
 // Calculates next number in the sequence
-int next(int n)
+long long next(long long n)
 {
   if(n%2 == 0)
   {
@@ -41,23 +41,24 @@ int main()
   int max_index = 1;
   int max_count = 1;
 
-  for(int i = 1; i < SIZE; i++)
+  for(int i = 1; i < 1000000; i++)
   {
-    int n = i;
+    long long n = i;
     int count = 1;
 
     // Calculate the sequence until it deteriorates
     // into one of the previously calculated cases
-    while(n != 1 && n >= i)
+    while(n > 1 && n >= i)
     {
       n = next(n);
       count++;
     }
 
-    // If it did deteriorat into one of the previous cases,
+    // If it did deteriorate into one of the previous cases,
     // add the number of steps from that case to the count
-    if(n != 1)
+    if(n > 1)
     {
+      // Subtract 1 because n is counted twice
       count += (steps[n] - 1);
     }
 
